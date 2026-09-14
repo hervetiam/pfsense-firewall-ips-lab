@@ -23,3 +23,18 @@ et un SIEM qui surveille l'intérieur.
 - Documenter l'ensemble du processus, y compris les erreurs et ce qu'elles m'ont appris
 
 ## Architecture
+    Kali Linux (attaquant)
+     10.0.0.10
+          |
+     intnet-wan
+          |
+    ┌──────────────┐
+    │   pfSense     │
+    │  WAN: 10.0.0.1│
+    │  LAN: 192.168.1.1
+    └──────────────┘
+          |
+     intnet-lan
+          |
+    Ubuntu Server (cible)
+     192.168.1.100
