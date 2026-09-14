@@ -8,7 +8,7 @@ Ce projet est un laboratoire personnel que j'ai monté pour développer des comp
 
 J'ai utilisé pfSense comme pare-feu/routeur, avec Kali Linux jouant le rôle d'un attaquant externe (sur le réseau WAN) et une machine Ubuntu comme cible protégée (sur le réseau LAN). Tout tourne en local dans VirtualBox, sur mon PC.
 
-Ce lab est le premier d'une série de deux projets connectés. Le second, [splunk-siem-insider-threat-lab](lien-vers-le-repo), 
+Ce lab est le premier d'une série de deux projets connectés. Le second, https://github.com/hervetiam/Splunk-SIEM-Lab-Insider-Threat-Detection.git, 
 part de cette même infrastructure et y ajoute un SIEM (Splunk) pour détecter les menaces internes — celles qu'un pare-feu périmétrique 
 comme pfSense ne peut pas voir. Ensemble, les deux projets illustrent le principe de défense en profondeur : un pare-feu qui filtre à la frontière, 
 et un SIEM qui surveille l'intérieur.
