@@ -22,6 +22,14 @@ et un SIEM qui surveille l'intérieur.
 - Tester une mitigation par limitation de débit (Traffic Shaper / Limiters)
 - Documenter l'ensemble du processus, y compris les erreurs et ce qu'elles m'ont appris
 
+## Environnement
+
+- Oracle VirtualBox (hôte Windows, 16 Go RAM)
+- pfSense CE 2.9.0
+- Kali Linux (image VirtualBox préconfigurée)
+- Ubuntu Server 26.04 LTS
+
+  
 ## Architecture
     Kali Linux (attaquant)
      10.0.0.10
