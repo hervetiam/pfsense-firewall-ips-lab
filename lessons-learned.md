@@ -19,5 +19,8 @@
 ## Méthodologie / troubleshooting
 
 - Lynx (navigateur texte) permet d'administrer pfSense sans interface graphique, mais se montre peu fiable sur des pages complexes (JS, CSRF tokens) — un accès réseau direct depuis un vrai navigateur reste préférable dès que possible.
+
+<img width="975" height="1029" alt="image" src="https://github.com/user-attachments/assets/b0c88e68-b8a6-4648-95b0-85c43e6f3494" />
+
 - `easyrule` sur pfSense a une syntaxe stricte nécessitant 4 arguments explicites pour une règle TCP/UDP avec port (interface, protocole, source, destination, port séparés par espaces) — l'usage de `:` pour combiner IP et port n'est pas supporté.
 - Toujours vérifier et cliquer sur "Apply Changes" après une modification de règle pfSense — les changements ne prennent effet qu'après validation explicite.
