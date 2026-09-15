@@ -36,7 +36,7 @@ MESSAGE DU LOG : Action: Pass | Interface: WAN | Protocol: ICMP (Echo Request) S
 <img width="624" height="175" alt="image" src="https://github.com/user-attachments/assets/c3fe82c1-141c-4508-9ceb-0a4daad80ada" />
 
 
-Les LOGS : 
+
 <img width="942" height="467" alt="image" src="https://github.com/user-attachments/assets/e2c9f07d-b07c-4a08-b991-e86fbe5e2bba" />
 
 
