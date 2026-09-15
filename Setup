@@ -11,9 +11,11 @@ L'architecture repose sur 3 machines virtuelles reliées par 2 réseaux internes
 - **intnet-wan** : simule le réseau externe/Internet. Connecte Kali (attaquant) et l'interface WAN de pfSense.
 - **intnet-lan** : réseau interne protégé. Connecte Ubuntu (cible) et l'interface LAN de pfSense.
 
-Les réseaux internes VirtualBox ne nécessitent aucune création préalable : ils se forment automatiquement dès que deux VMs partagent le même nom de réseau dans leurs paramètres d'adaptateur (Settings → Network → Attached to: Internal Network → Name).
+Les réseaux internes VirtualBox ne nécessitent aucune création préalable : ils se forment automatiquement dès que deux 
+VMs partagent le même nom de réseau dans leurs paramètres d'adaptateur (Settings → Network → Attached to: Internal Network → Name).
 
-Une 3e interface a été ajoutée plus tard sur pfSense (OPT1, connectée à un réseau **Host-only** VirtualBox) pour permettre l'accès à l'interface web de pfSense directement depuis mon PC hôte.
+Une 3e interface a été ajoutée plus tard sur pfSense (OPT1, connectée à un réseau **Host-only** VirtualBox) pour permettre l'accès 
+à l'interface web de pfSense directement depuis mon PC hôte.
 
 | Machine | Rôle | Interface(s) réseau | IP |
 |---|---|---|---|
@@ -55,15 +57,12 @@ Via le menu console (option 2 - Set interface IP address) :
 2. Redémarrage, assignation de l'interface (option 1) : WAN=em0, LAN=em1, OPT1=em2
 3. Configuration IP statique sur OPT1 : `192.168.56.10/24`
 4. Ajout d'une règle de pare-feu autorisant l'accès HTTPS (port 443) depuis mon PC hôte, via le shell pfSense (option 8) :
-```bash
-easyrule pass opt1 tcp 192.168.56.1 any 443
-```
+Commande bash : easyrule pass opt1 tcp 192.168.56.1 any 443
 
----
 
 ## 3. Installation d'Ubuntu Server (machine cible)
 
-- Version : Ubuntu Server 26.04 LTS, installation "unattended" via l'assistant VirtualBox
+- Version : Ubuntu Server 26.04 LTS.
 - RAM : 2048 MB
 - Disque : 25 GB
 - Graphics Controller : changé de VMSVGA à **VBoxSVGA** (VMSVGA causait une erreur d'affichage bloquante sur cette version d'Ubuntu)
@@ -72,11 +71,11 @@ easyrule pass opt1 tcp 192.168.56.1 any 443
 Une fois démarrée et connectée au LAN, la VM reçoit automatiquement une IP par DHCP depuis pfSense (`192.168.1.100`).
 
 Pas d'interface graphique sur Ubuntu Server — installation du navigateur texte `lynx` pour un premier accès à l'interface web de pfSense avant que l'accès depuis le PC hôte (OPT1) ne soit configuré :
-```bash
+Commande bash  :
 sudo apt update
 sudo apt install lynx -y
 lynx https://192.168.1.1
-```
+
 
 ---
 
@@ -88,17 +87,13 @@ lynx https://192.168.1.1
 
 ### Configuration IP statique
 Kali n'a pas d'IP par défaut car il n'y a pas de serveur DHCP actif sur le réseau WAN (comportement volontaire, pour simuler un réseau externe non géré). Configuration d'une IP statique permanente via NetworkManager :
-```bash
+commande bash : 
 sudo nmcli connection add type ethernet ifname eth0 con-name "wan-static" ip4 10.0.0.10/24
 sudo nmcli connection up wan-static
-```
+
 
 Ajout d'une route par défaut vers pfSense (nécessaire pour atteindre le réseau LAN, pas seulement le WAN local) :
-```bash
-sudo ip route add default via 10.0.0.1 dev eth0
-```
-
----
+Commande bash :  sudo ip route add default via 10.0.0.1 dev eth0
 
 ## 5. Suricata (IPS) — à venir
 
