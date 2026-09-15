@@ -45,4 +45,8 @@ Un Limiter a été configuré (`icmp_flood_limit`, 10 Kbit/s) et associé à la 
 
 La règle a été modifiée de **Pass** à **Block**.
 
-**Résultat** :
+ping 192.168.1.100 -c 4` → 100% packet loss confirmé.
+
+**Résultat** : MESSAGE LOG 
+
+Action: block Matched Rule: block drop in log quick on em0 inet proto icmp from any to 192.168.1.100 icmp-type echoreq
