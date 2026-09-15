@@ -29,18 +29,6 @@ et un SIEM qui surveille l'intérieur.
 
   
 ## Architecture
-    Kali Linux (attaquant)
-     10.0.0.10
-          |
-     intnet-wan
-          |
-    ┌──────────────┐
-    │   pfSense     │
-    │  WAN: 10.0.0.1│
-    │  LAN: 192.168.1.1
-    └──────────────┘
-          |
-     intnet-lan
-          |
-    Ubuntu Server (cible)
-     192.168.1.100
+
+   <img width="667" height="517" alt="image" src="https://github.com/user-attachments/assets/97fc216c-47f2-4947-b6b2-ba1bf6bce26e" />
+
