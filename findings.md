@@ -59,6 +59,8 @@ La règle a été modifiée de **Pass** à **Block**.
 
 
 
+
+
 ping 192.168.1.100 -c 4` → 100% packet loss confirmé.
 
 **Résultat** : MESSAGE LOG 
