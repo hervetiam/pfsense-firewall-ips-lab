@@ -95,6 +95,34 @@ sudo nmcli connection up wan-static
 Ajout d'une route par défaut vers pfSense (nécessaire pour atteindre le réseau LAN, pas seulement le WAN local) :
 Commande bash :  sudo ip route add default via 10.0.0.1 dev eth0
 
-## 5. Suricata (IPS) — à venir
+## 5. Suricata (IPS) 
 
-Cette section sera complétée lors de l'ajout de Suricata comme couche IPS par-dessus le pare-feu pfSense, pour la détection de signatures d'attaque en complément du filtrage par règles.
+Ajout de Suricata (IDS/IPS) sur pfSense
+
+Après réflexion sur la nature exacte de mon lab pfSense, j'ai réalisé qu'un pare-feu stateful seul (règles pass/block par IP/port/protocole) 
+ne constitue pas un IDS ni un IPS — ces derniers analysent le contenu des paquets à la recherche de signatures d'attaques connues, 
+ce que pfSense seul ne fait pas. Pour que mon lab justifie légitimement l'appellation IDS/IPS, j'ai ajouté Suricata, un moteur de détection/prévention d'intrusion qui s'installe directement comme package dans pfSense (plutôt que comme VM séparée), transformant ainsi pfSense en une plateforme de type UTM (Unified Threat Management).
+
+Installation :
+
+System → Package Manager → Available Packages → suricata → Install
+
+📸 Capture de l'installation réussie du package.
+
+Configuration des règles (signatures) :
+J'ai activé le jeu de signatures gratuit Emerging Threats Open (ET Open) via :
+
+Services → Suricata → Updates → Update
+
+📸 Capture confirmant le téléchargement réussi (hash MD5 + date).
+
+Plutôt que d'activer l'ensemble des catégories de règles ET Open (plusieurs milliers de signatures, gourmandes en ressources),
+j'ai sélectionné uniquement les catégories pertinentes pour mon lab : ICMP, DoS, exploits, réponses à une compromission, 
+événements courants — un choix motivé par les limites de ressources déjà rencontrées côté Splunk (voir lessons-learned).
+
+Attachement à l'interface réseau :
+J'ai attaché Suricata à l'interface WAN (Services → Suricata → Interfaces → Add), avec le mode "Block Offenders" 
+(Legacy Mode) activé — ce qui fait de cette configuration un véritable IPS (prévention active), et non un simple IDS passif :
+toute IP source déclenchant une règle est automatiquement bloquée par pfSense.
+
+📸 Capture du statut de l'interface WAN (Suricata Status : running, Legacy Mode).
