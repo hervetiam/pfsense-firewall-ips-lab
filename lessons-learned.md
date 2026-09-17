@@ -16,6 +16,17 @@
 - **Rate-limiting du logging** : sous forte charge (flood), pfSense limite volontairement le volume de logs générés pour se protéger — un flood de millions de paquets ne produit que quelques lignes de log.
 - **États (states) vs débit (rate)** : `max-src-states` limite les connexions simultanées distinctes, pas le débit de paquets au sein d'une même connexion — un Limiter (Traffic Shaper/dummynet) est nécessaire pour contrôler un flood au sein d'une seule state.
 
+## suricata
+
+Un firewall stateful n'est pas un IDS/IPS. J'ai appris à distinguer clairement ces deux concepts : pfSense, dans sa configuration de base, filtre le trafic par règles (IP, port, protocole) — c'est du firewall stateful classique, pas de la détection d'intrusion. Un IDS/IPS analyse le contenu des paquets contre des signatures connues. Suricata, installé comme package pfSense, ajoute cette capacité et transforme l'ensemble en plateforme UTM.
+
+Les signatures ne détectent pas tout type d'attaque. Une attaque volumétrique (flood ICMP) n'est pas détectée par les règles de signatures standards, car elle ne contient aucun pattern "anormal" — chaque paquet est individuellement valide. Ce type d'attaque nécessite des règles à seuil (threshold-based), qui comptent la fréquence des événements plutôt que d'analyser leur contenu. C'est une limite importante et réaliste des IDS/IPS signature-based que je n'aurais pas anticipée sans ce test pratique.
+
+
+
+
+
+
 ## Méthodologie / troubleshooting
 
 - Lynx (navigateur texte) permet d'administrer pfSense sans interface graphique, mais se montre peu fiable sur des pages complexes (JS, CSRF tokens) — un accès réseau direct depuis un vrai navigateur reste préférable dès que possible.
