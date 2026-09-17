@@ -24,9 +24,6 @@ Les signatures ne détectent pas tout type d'attaque. Une attaque volumétrique 
 
 
 
-
-
-
 ## Méthodologie / troubleshooting
 
 - Lynx (navigateur texte) permet d'administrer pfSense sans interface graphique, mais se montre peu fiable sur des pages complexes (JS, CSRF tokens) — un accès réseau direct depuis un vrai navigateur reste préférable dès que possible.
